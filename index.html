@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lễ Dạm Ngõ - Quốc Hưng & Quỳnh Như</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Great+Vibes&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-pink: #fdf2f7;
+            --text-maroon: #8b2635;
+            --text-light-pink: #f2cbd6;
+            --gold: #d4af37;
+        }
+
+        * { box-sizing: border-box; }
+
+        body, html {
+            margin: 0; padding: 0;
+            width: 100%; height: 100%;
+            overflow: hidden;
+            background-color: var(--bg-pink);
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .full-screen-card {
+            width: 100vw; height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .double-happiness {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 60vh;
+            color: var(--text-light-pink);
+            opacity: 0.3;
+            z-index: 0;
+        }
+
+        /* LỒNG ĐÈN */
+        .lantern-box {
+            position: absolute;
+            top: -10px;
+            z-index: 5;
+            transform-origin: top center;
+            animation: swing 3.5s infinite ease-in-out;
+        }
+        .lantern-left { left: 8%; }
+        .lantern-right { right: 8%; animation-delay: -1.7s; }
+
+        .lantern-string { width: 2px; background: #d32f2f; margin: 0 auto; }
+        .l-left-height { height: 80px; } 
+        .l-right-height { height: 110px; }
+
+        .lantern-body {
+            width: 45px; height: 40px;
+            background: #d32f2f;
+            border-radius: 50% / 15%;
+            position: relative;
+            border-top: 3px solid #b71c1c;
+            border-bottom: 3px solid #b71c1c;
+        }
+        .lantern-body::after { content: "囍"; color: gold; font-size: 18px; display: flex; justify-content: center; align-items: center; height: 100%; }
+        .tassel { width: 2px; height: 50px; background: gold; margin: 0 auto; position: relative; }
+
+        @keyframes swing { 0%, 100% { transform: rotate(-6deg); } 50% { transform: rotate(6deg); } }
+
+        .header { font-size: clamp(24px, 5vw, 45px); color: var(--text-maroon); letter-spacing: 12px; z-index: 2; margin-top: 20px; }
+
+        .names-wrapper { display: flex; justify-content: center; align-items: center; gap: 8vw; z-index: 2; margin: 20px 0; }
+        .name { font-family: 'Great Vibes', cursive; font-size: clamp(45px, 9vw, 110px); color: var(--text-maroon); animation: fadeInUp 1.8s ease-out; }
+        .ampersand { font-family: 'Dancing Script', cursive; font-size: clamp(35px, 6vw, 75px); color: var(--gold); }
+
+        /* LỜI CẢM ƠN - Chia 2 dòng */
+        .thank-you-msg {
+            max-width: 85%;
+            font-size: clamp(18px, 3vw, 26px); /* Tăng thêm một chút để rõ ràng */
+            color: var(--text-maroon);
+            font-style: italic;
+            font-weight: 400;
+            line-height: 1.8; /* Tăng khoảng cách dòng */
+            z-index: 2;
+            opacity: 0;
+            animation: fadeIn 3s ease forwards 1.5s;
+        }
+
+        .date-container {
+            width: 85%; max-width: 900px;
+            display: flex; justify-content: space-between;
+            color: var(--text-maroon); font-weight: 700;
+            font-size: clamp(16px, 3.5vw, 26px);
+            border-top: 2.5px solid var(--text-maroon);
+            padding-top: 25px; z-index: 2;
+        }
+
+        .music-control {
+            position: fixed; bottom: 20px; left: 20px;
+            z-index: 100; background: rgba(139, 38, 53, 0.8); color: white;
+            border: none; width: 45px; height: 45px; border-radius: 50%;
+            cursor: pointer; display: flex; justify-content: center; align-items: center;
+        }
+
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(50px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        .petal { position: absolute; z-index: 1; pointer-events: none; animation: fall linear forwards; }
+        @keyframes fall { to { transform: translateY(110vh) rotate(540deg); } }
+    </style>
+</head>
+<body>
+
+    <audio id="weddingMusic" loop>
+        <source src="nhac-dam-cuoi.mp3" type="audio/mpeg">
+    </audio>
+
+    <button class="music-control" onclick="toggleMusic()" id="musicBtn">🎵</button>
+
+    <div class="full-screen-card">
+        <div class="double-happiness">囍</div>
+        
+        <div class="lantern-box lantern-left">
+            <div class="lantern-string l-left-height"></div>
+            <div class="lantern-body"></div>
+            <div class="tassel"></div>
+        </div>
+
+        <div class="lantern-box lantern-right">
+            <div class="lantern-string l-right-height"></div>
+            <div class="lantern-body"></div>
+            <div class="tassel"></div>
+        </div>
+
+        <div class="header">LỄ DẠM NGÕ</div>
+
+        <div class="names-wrapper">
+            <div class="name">Quốc Hưng</div>
+            <div class="ampersand">&</div>
+            <div class="name">Quỳnh Như</div>
+        </div>
+
+        <div class="thank-you-msg">
+            Xin cảm ơn hai bên gia đình <br>đã yêu thương
+            và vun đắp cho chúng con
+        </div>
+
+        <div class="date-container">
+            <span>21.12.2025</span>
+            <span>02.11 (ẤT TỴ)</span>
+        </div>
+    </div>
+
+    <script>
+        const music = document.getElementById('weddingMusic');
+        const btn = document.getElementById('musicBtn');
+
+        function toggleMusic() {
+            if (music.paused) {
+                music.play().catch(e => console.log("Cần tương tác để phát nhạc"));
+                btn.innerHTML = '⏸️';
+            } else {
+                music.pause();
+                btn.innerHTML = '🎵';
+            }
+        }
+
+        document.body.addEventListener('click', () => { if(music.paused) toggleMusic(); }, { once: true });
+
+        function createPetal() {
+            const petal = document.createElement('div');
+            petal.className = 'petal';
+            const size = Math.random() * 15 + 10 + 'px';
+            petal.style.width = size; petal.style.height = size;
+            petal.style.left = Math.random() * 100 + 'vw';
+            petal.style.top = '-20px';
+            petal.style.backgroundColor = '#ffb7c5';
+            petal.style.borderRadius = '150% 0 150% 0';
+            petal.style.opacity = Math.random() * 0.6 + 0.4;
+            const duration = Math.random() * 5 + 6;
+            petal.style.animationDuration = duration + 's';
+            document.body.appendChild(petal);
+            setTimeout(() => petal.remove(), duration * 1000);
+        }
+        setInterval(createPetal, 450);
+    </script>
+
+</body>
+</html>
